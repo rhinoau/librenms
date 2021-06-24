@@ -4,6 +4,14 @@
     loadjs('js/leaflet.js', function() {
     loadjs('js/leaflet.markercluster.js', function () {
     loadjs('js/leaflet.awesome-markers.min.js', function () {
+
+        // prevent 'Map container is already initialized.` error
+        // currently this fix prevents dragging the maps until after first auto-refresh
+        var container = L.DomUtil.get('leaflet-map-{{ $id }}');
+            if(container != null){
+                container._leaflet_id = null;
+        }
+
         var map = L.map('leaflet-map-{{ $id }}', { zoomSnap: 0.1 } ).setView(['{{ $init_lat }}', '{{ $init_lng }}'], '{{ sprintf('%01.1f', $init_zoom) }}');
         L.tileLayer('//{{ $title_url }}/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
