@@ -44,3 +44,13 @@ alerts will resume. Click this icon to un-acknowledge the alert.
 
 ![alert notes](img/notes.png) This column will allow you access to the
 acknowledge/unacknowledge notes for this alert.
+
+
+``` mermaid
+graph LR
+  A[Start] --> B{Error?};
+  B -->|Yes| C[Hmm...];
+  C --> D[Debug];
+  D --> B;
+  B ---->|No| E[Yay!];
+```
